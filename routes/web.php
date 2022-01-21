@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\DescriptionController;
+use App\Http\Controllers\EducationController;
+use App\Http\Controllers\ExperienceController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,5 +34,13 @@ Route::prefix('dashboard')->middleware(['auth'])->group(function () {
     Route::get('users/{user}/change-role', [UserController::class, 'changeStatus'])->name('users.change_status');
     // AboutController
     Route::resource('about', AboutController::class);
+    // ExperienceController
+    Route::resource('experience', ExperienceController::class);
+     // EducationController
+     Route::resource('education', EducationController::class);
+       // HomeController
+    //    Route::resource('home', HomeController::class);
+        // DescriptionController
+        Route::resource('description', DescriptionController::class);
     
 });
