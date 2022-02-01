@@ -2,84 +2,48 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\About;
+use App\Models\Contact;
+use App\Models\Description;
+use App\Models\Education;
+use App\Models\Experience;
+use App\Models\MySite;
 use App\Models\User;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\AssignOp\Concat;
 
 class HomeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function home(){
+        $user = User::first();
+        $description = Description::first();
+        $about = About::first();
+        return view('front.index', compact('user', 'description', 'about'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+   public function about(){
+       $about = About::first();
+       $user = User::first();
+       $experiences = Experience::all();
+       return view('front.home.about', compact('about','user', 'experiences'));
+   }
+    public function education()
     {
-        //
+        $user = User::first();
+        $about = About::first();
+        $educations = Education::all();
+        return view('front.home.education', compact('educations', 'user', 'about'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function mySites(){
+        $user = User::first();
+        $about = About::first();
+        $my_sites = MySite::all();
+        return view('front.home.my-sites', compact('user', 'about', 'my_sites'));
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
+    public function contact()
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(User $user)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, User $user)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(User $user)
-    {
-        //
+        $contact = Contact::first();
+        $user = User::first();
+        $about = About::first();
+        return view('front.home.contact', compact('contact', 'user', 'about'));
     }
 }

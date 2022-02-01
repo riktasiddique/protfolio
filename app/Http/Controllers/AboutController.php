@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\About;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AboutController extends Controller
 {
@@ -23,9 +25,9 @@ class AboutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(About $about)
     {
-        return view('admin.about.create');
+        return view('admin.about.create', compact('about'));
     }
 
     /**
@@ -36,15 +38,31 @@ class AboutController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
+        $request->validate([
+            'age' => 'required',
+            'qualification' => 'required',
+            'post' => 'required',
+            'language1' => 'required',
+            'language2' => 'required',
+            // 'phone' => 'required',
+        ]);
+        
+        $user = Auth::user();
+        $profile_picture = $request->profile_picture;
+
+        $path1 = $profile_picture? Storage::url($request->file('profile_picture')->store('public/images/'. $user->id)): '';
+        // return $path1;
+
         $about = new About();
         $about->language1 = $request->language1;
         $about->language2 = $request->language2;
         $about->language3 = $request->language3;
         $about->language4 = $request->language4;
+        $about->user_id = $user->id;
         $about->age = $request->age;
         $about->qualification = $request->qualification;
         $about->post = $request->post;
+        $about->profile_picture = $path1;
         $about->save();
         return redirect()->route('about.index');
     }
@@ -68,7 +86,7 @@ class AboutController extends Controller
      */
     public function edit(About $about)
     {
-        //
+        return view('admin.about.edit', compact('about'));
     }
 
     /**
@@ -78,9 +96,34 @@ class AboutController extends Controller
      * @param  \App\Models\About  $about
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, About $about)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'age' => 'required',
+            'qualification' => 'required',
+            'post' => 'required',
+            'language1' => 'required',
+            'language2' => 'required',
+        ]);
+        
+        $user = Auth::user();
+        $profile_picture = $request->profile_picture;
+
+        $path1 = $profile_picture? Storage::url($request->file('profile_picture')->store('public/images/'. $user->id)): '';
+        // return $path1;
+
+        $about = About::findOrFail($id);
+        $about->language1 = $request->language1;
+        $about->language2 = $request->language2;
+        $about->language3 = $request->language3;
+        $about->language4 = $request->language4;
+        $about->user_id = $user->id;
+        $about->age = $request->age;
+        $about->qualification = $request->qualification;
+        $about->post = $request->post;
+        $about->profile_picture = $path1;
+        $about->save();
+        return redirect()->route('about.index')->with('success', 'The Post Updated Successfuly!');
     }
 
     /**

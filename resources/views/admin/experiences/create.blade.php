@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Create About')
+@section('title', 'Create Experience')
 @section('content')
     <div class="row justify-content-center ">
         <div class="col-md-6 border border-light p-4">
@@ -21,7 +21,7 @@
                     <label class="form-check-label text-white" for="exampleCheck1">Check me out</label>
                 </div>
                 <button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
-        </form>
+            </form>
         </div>
     </div>
 @endsection

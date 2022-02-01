@@ -10,6 +10,7 @@
                         <thead>
                             <tr>
                             <th scope="col">Id</th>
+                            <th scope="col">Creator</th>
                             <th scope="col">Number</th>
                             <th scope="col">Title</th>
                             <th scope="col">Distroy</th>
@@ -20,6 +21,7 @@
                             @foreach($experiences as $experience)
                             <tr>
                                 <th scope="row">{{$experience->id}}</th>
+                                <td>{{$experience->creator->name}}</td>
                                 <td>{{$experience->number}}</td>
                                 <td>{{$experience->title}}</td>
                                 <td>

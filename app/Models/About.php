@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class About extends Model
 {
     use HasFactory;
+    public function creator(){
+        return $this->belongsTo('App\Models\User', 'user_id', 'id')->withDefault();
+    }
 }

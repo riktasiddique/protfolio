@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Education;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EducationController extends Controller
 {
@@ -36,7 +37,17 @@ class EducationController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'exam_title' => 'required',
+            'major' => 'required',
+            'institute' => 'required',
+            'result' => 'required',
+            'passing_year' => 'required',
+            'duration' => 'required',
+        ]);
+        $user = Auth::user();
         $education = new Education();
+        $education->user_id = $user->id;
         $education->exam_title = $request->exam_title;
         $education->major = $request->major;
         $education->institute = $request->institute;
@@ -55,7 +66,7 @@ class EducationController extends Controller
      */
     public function show(Education $education)
     {
-        //
+        return view('admin.educations.show', compact('education'));
     }
 
     /**
@@ -66,7 +77,7 @@ class EducationController extends Controller
      */
     public function edit(Education $education)
     {
-        //
+        return view('admin.educations.edit', compact('education'));
     }
 
     /**
@@ -76,9 +87,27 @@ class EducationController extends Controller
      * @param  \App\Models\Education  $education
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Education $education)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'exam_title' => 'required',
+            'major' => 'required',
+            'institute' => 'required',
+            'result' => 'required',
+            'passing_year' => 'required',
+            'duration' => 'required',
+        ]);
+        $user = Auth::user();
+        $education = Education::findOrFail($id);
+        $education->exam_title = $request->exam_title;
+        $education->user_id = $user->id;
+        $education->major = $request->major;
+        $education->institute = $request->institute;
+        $education->result = $request->result;
+        $education->passing_year = $request->passing_year;
+        $education->duration = $request->duration;
+        $education->save();
+        return redirect()->route('education.index')->with('success', 'The Education Row Updated Successfuly!');
     }
 
     /**
@@ -89,6 +118,7 @@ class EducationController extends Controller
      */
     public function destroy(Education $education)
     {
-        //
+        $education->delete();
+        return back();
     }
 }

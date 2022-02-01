@@ -5,11 +5,19 @@
         <div class="col-md-6 border border-light p-4">
             <h3 class="text-center text-white">Fill Up the form</h3>
             <hr>
-            <form action="{{route('about.store')}}" method="POST">
+            <form action="{{route('about.store',  $about->id)}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label for="exampleInputage1" class="text-white">Age</label>
                     <input type="text" name="age" class="form-control rounded" id="exampleInputage1" aria-describedby="ageHelp">
+                </div>
+                <!-- <div class="form-group">
+                    <label for="exampleInputage1" class="text-white">Phone</label>
+                    <input type="number" name="phone" class="form-control rounded" id="exampleInputage1" aria-describedby="ageHelp">
+                </div> -->
+                <div class="form-group">
+                    <label for="exampleInputage1" class="text-white">Profile Picture</label>
+                    <input type="file" name="profile_picture" class="form-control rounded" id="exampleInputpost1" aria-describedby="postHelp">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputage1" class="text-white">Qualification</label>

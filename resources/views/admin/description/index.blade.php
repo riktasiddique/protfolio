@@ -9,14 +9,17 @@
                     <thead>
                                 <tr>
                                 <th scope="col">Id</th>
+                                <th scope="col">Creator</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Action</th>
+                                <th scope="col">Update</th>
                                 </tr>
                     </thead>
                     <tbody>
                         @foreach($descriptions as $description)
                         <tr>
                                     <th scope="row">{{$description->id}}</th>
+                                    <td>{{$description->creator->name}}</td>
                                     <td>{{$description->description}}</td>
                                     <td>
                                     <form action="{{route('description.destroy', $description->id)}}" method="POST">

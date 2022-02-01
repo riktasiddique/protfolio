@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Description;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DescriptionController extends Controller
 {
@@ -37,10 +38,11 @@ class DescriptionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'description' => 'required|max:100',
+            'description' => 'required|max:300',
         ]);
-
+        $user = Auth::user();
         $description = new Description();
+        $description->user_id = $user->id;
         $description->description = $request->description;
         $description->save();
         
@@ -66,7 +68,7 @@ class DescriptionController extends Controller
      */
     public function edit(Description $description)
     {
-        //
+        return view('admin.description.edit', compact('description'));
     }
 
     /**
@@ -76,9 +78,19 @@ class DescriptionController extends Controller
      * @param  \App\Models\Description  $description
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Description $description)
+    public function update(Request $request, $id)
     {
-        //
+        // return $request;
+        $request->validate([
+            'description' => 'required|max:300',
+        ]);
+        $user = Auth::user();
+        $description = Description::findOrFail($id);
+        $description->user_id = $user->id;
+        $description->description = $request->description;
+        $description->save();
+        
+        return redirect()->route('description.index')->with('success', 'The Description Updated Successfuly!');
     }
 
     /**

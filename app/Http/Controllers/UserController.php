@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\About;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,7 +49,8 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('admin.users.show', compact('user'));
+        $about = About::first();
+        return view('admin.users.show', compact('user', 'about'));
     }
 
     /**

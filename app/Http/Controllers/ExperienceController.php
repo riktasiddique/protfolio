@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Experience;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ExperienceController extends Controller
 {
@@ -41,8 +42,9 @@ class ExperienceController extends Controller
             'number' => 'required',
         ]);
         // return $request;
-        
+        $user = Auth::user();
         $expesience = new Experience();
+        $expesience->user_id = $user->id;
         $expesience->number = $request->number;
         $expesience->title = $request->title;
         $expesience->save();
@@ -69,7 +71,7 @@ class ExperienceController extends Controller
      */
     public function edit(Experience $experience)
     {
-        //
+        return view('admin.experiences.edit', compact('experience'));
     }
 
     /**
@@ -79,9 +81,20 @@ class ExperienceController extends Controller
      * @param  \App\Models\Experience  $experience
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Experience $experience)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:100',
+            'number' => 'required',
+        ]);
+        // return $request;
+        $user = Auth::user();
+        $expesience = Experience::findOrFail($id);
+        $expesience->user_id = $user->id;
+        $expesience->number = $request->number;
+        $expesience->title = $request->title;
+        $expesience->save();
+        return redirect()->route('experience.index')->with('success', 'The New Experience Row Updated Successfuly!');
     }
 
     /**

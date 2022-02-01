@@ -7,7 +7,7 @@
                                 <div class="panel-heading custom-blog-hd">
                                     <div class="media clearfix">
                                         <a class="pull-left">
-                                                <img class="img-circle" src="{{asset('admin/img/contact/2.jpg')}}" alt="profile-picture">
+                                                <img class="img-circle" src="{{$about->profile_picture}}" alt="profile-picture" height="50" width="80">
                                             </a>
                                         <div class="media-body blog-std ">
                                             <p><span class="text-secondary"> Created by: </span><span class="font-bold text-info">{{$user->name}}</span> </p>

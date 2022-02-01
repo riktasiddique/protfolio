@@ -29,18 +29,19 @@
                                                 <li class="nav-item">
                                                     <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
 															<!-- <i class="icon nalika-user"></i> -->
-															<span class="admin-name">Settings</span>
+															<span class="admin-name"> <i class="fa fas fa-gear"></i> Settings</span>
 															<!-- <i class="icon nalika-down-arrow nalika-angle-dw"></i> -->
 														</a>
                                                     <ul role="menu" class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                                        <li><a href="#"><span class="icon nalika-user author-log-ic"></span>Home Page</a>
+                                                        <li><a href="\"><span class=""></span><i class="fa fa-home"></i> Home Page</a>
                                                         </li>
-                                                        <li><a href="register.html"><span class="icon nalika-home author-log-ic"></span> Change Password</a>
+                                                        <li><a href="{{route('profile.index')}}"><span class=""></span> <i class="fa fas fa-user-circle"></i> Profile</a>
                                                         </li>
                                                         <li>
+                                                        
                                                             <form method="POST" action="{{ route('logout') }}">
                                                                 @csrf
-                                                                <a href="" onclick="event.preventDefault(); this.closest('form').submit();"><span class="icon nalika-unlocked author-log-ic"></span> Log Out</a>
+                                                                <a href="" onclick="event.preventDefault(); this.closest('form').submit();"><span class=""></span><i class="fa fas fa-power-off"></i> Log Out</a>
                                                             </form>
                                                         </li>
                                                     </ul>

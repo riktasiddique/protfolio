@@ -68,7 +68,7 @@
 
     <div class="color-line"></div>
     
-    <div class="container-fluid">
+    {{-- <div class="container-fluid">
         <div class="row">
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"></div>
             <div class="col-md-4 col-md-4 col-sm-4 col-xs-12">
@@ -78,6 +78,15 @@
                 </div>
                 <div class="hpanel">
                     <div class="panel-body">
+                      @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                      @endif
                         <form action="{{ route('register') }}" method="POST" id="loginForm">
                             @csrf
                             <div class="form-group">
@@ -119,7 +128,7 @@
                 <!-- <p>Copyright © 2018 <a href="https://colorlib.com/wp/templates/">Colorlib</a> All rights reserved.</p> -->
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <!-- jquery
 		============================================ -->

@@ -77,6 +77,15 @@
                     <p>This is the best app ever!</p>
                 </div>
                 <div class="hpanel">
+                  @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                  @endif
                     <div class="panel-body">
                         <form action="{{ route('login') }}" method="POST" id="loginForm">
                             @csrf
