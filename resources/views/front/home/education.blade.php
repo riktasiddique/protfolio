@@ -1,6 +1,7 @@
 @extends('layouts.home-app.app')
 @section('title', 'Education')
 @section('content')
+
 <section class="education" id="education">
 
     <h1 class="heading"> my <span>education</span> </h1>
